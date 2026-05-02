@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SHINEXPRO CARZ SPA | Premium Detailing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- GLOBAL & NAV STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f4f4f4;
+            color: #1f1d1d;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .nav-wrapper {
+            background: #1a1a1a;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        nav {
+            position: relative;
+            background-color: #222;
+            border-radius: 8px;
+            display: flex;
+            padding: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            position: relative;
+            display: inline-block;
+            font-size: 0.9em;
+            font-weight: 500;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            z-index: 1;
+        }
+
+        nav span {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            height: calc(100% - 10px);
+            background: linear-gradient(45deg, #4f1919, #ff3333);
+            border-radius: 6px;
+            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* --- HERO & SECTIONS --- */
+        header {
+            background: #1a1a1a;
+            padding: 30px 20px;
+            text-align: center;
+            color: #ffffff;
+            border-bottom: 3px solid #ff3333;
+        }
+
+        section.hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.carandbike.com/car-images/gallery/volkswagen/vento/exterior/volkswagen-vento-red-and-white-edition.jpg') no-repeat center center/cover;
+            color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+            color: #1a1a1a;
+            font-size: 2rem;
+        }
+
+        /* --- PRICING GRID --- */
+        .pricing-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .price-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 5px solid #ff3333;
+        }
+
+        .price-card h3 { margin-bottom: 15px; }
+        .price-card .amount { 
+            font-size: 2em; 
+            font-weight: 600; 
+            color: #ff3333;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* --- GALLERY STYLES --- */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 51, 51, 0.85);
+            color: white;
+            text-align: center;
+            transform: translateY(100%);
+            transition: 0.3s ease;
+            font-weight: 600;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        /* --- FORM STYLES --- */
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 5px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            font-size: 1rem;
+            background: #fafafa;
+        }
+
+        .error-text {
+            color: #ff3333;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .cta-button, button[type="submit"] {
+            display: inline-block;
+            background: #ff3333;
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .cta-button:hover, button[type="submit"]:hover {
+            background: #e62e2e;
+            transform: translateY(-2px);
+        }
+
+        /* ============================================================
+           ADDED MOBILE RESPONSIVE CODE
+           ============================================================ */
+        @media (max-width: 768px) {
+            .nav-wrapper { padding: 5px 0; }
+            nav { background: transparent; gap: 5px; }
+            nav a { background: #222; border-radius: 4px; padding: 8px 12px; font-size: 0.8em; }
+            nav span { display: none; }
+            
+            section.hero { padding: 60px 20px; }
+            .hero h2 { font-size: 1.8rem; }
+            
+            .gallery-container { grid-template-columns: 1fr; } /* Stacks images on mobile */
+            .pricing-container { grid-template-columns: 1fr; } /* Stacks price cards on mobile */
+            
+            .container { width: 95%; padding: 20px; margin: 20px auto; }
+            
+            /* Better touch targets for phone users */
+            input, select, textarea, button { min-height: 48px; font-size: 16px !important; }
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            text-decoration: none;
+            font-size: 30px;
+            transition: 0.3s;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+        /* ============================================================ */
+
+    </style>
+</head>
+<body>
+
+    <a href="https://wa.me/917887428828" class="whatsapp-float" target="_blank">💬</a>
+
+    <div class="nav-wrapper">
+        <nav id="mainNav">
+            <a href="#" class="nav-link">Home</a>
+            <a href="#gallery" class="nav-link">Gallery</a>
+            <a href="#services" class="nav-link">Services</a>
+            <a href="#contact" class="nav-link">Book Now</a>
+            <span id="nav-indicator"></span>
+        </nav>
+    </div>
+
+    <header>
+        <h1>SHINEXPRO CARZ SPA</h1>
+    </header>
+
+    <section class="hero">
+        <h2>Premium Car Care</h2>
+        <p>Expert detailing starting from just ₹349</p>
+        <a href="#contact" style="width: auto; margin-top: 20px;" class="cta-button">Get in touch</a>
+    </section>
+
+    <section id="gallery" style="padding: 60px 0; background: #fff;">
+        <h2 class="section-title">Our Work Gallery</h2>
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7-Dhvq4cV7F-9qOm4yxcdpg6Acj2IgpQgCw&s" alt="Foam Wash" loading="lazy">
+                <div class="gallery-overlay">Premium Foam Wash</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRU6C_NepiE_vq12XSbotMO06WJAjm-b-32w&s" alt="Interior Detailing" loading="lazy">
+                <div class="gallery-overlay">Deep Interior Cleaning</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://5.imimg.com/data5/AV/OU/MY-5563316/10.jpg" alt="Wheel Care" loading="lazy">
+                <div class="gallery-overlay">Alloy Wheel Detailing</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3ibrjrJmZlfW4XIEGplFgU2Hqa68cF_YP53uFJBmXdg&s" alt="Final Inspection Shine" loading="lazy">
+                <div class="gallery-overlay">Final Inspection Shine</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" style="padding: 60px 0;">
+        <h2 class="section-title">Our Popular Services</h2>
+        <div class="pricing-container">
+            <div class="price-card">
+                <h3>Basic Wash</h3>
+                <span class="amount">₹349</span>
+                <p>Exterior foam wash & tire dressing.</p>
+            </div>
+            <div class="price-card">
+                <h3>Deep Cleaning</h3>
+                <span class="amount">₹1,999</span>
+                <p>Interior vacuuming + Steam cleaning.</p>
+            </div>
+            <div class="price-card">
+                <h3>Ceramic Coating</h3>
+                <span class="amount">₹11,111</span>
+                <p>9H Hardness protection & High gloss.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="contact" class="contact">
+            <h2 class="section-title">Book an Appointment</h2>
+            <form id="carSpaForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name">
+                <p class="error-text" id="nameError">Please enter your full name.</p>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email">
+                <p class="error-text" id="emailError">Please enter a valid email address.</p>
+
+                <label for="service">Select Service:</label>
+                <select id="service" name="service">
+                    <option value="">-- Choose a Service --</option>
+                    <option value="Basic Wash">Basic Wash - ₹349</option>
+                    <option value="Deep Cleaning">Deep Cleaning - ₹1,999</option>
+                    <option value="Ceramic Coating">Ceramic Coating - ₹11,111</option>
+                    <option value="Other">Other Inquiry</option>
+                </select>
+                <p class="error-text" id="serviceError">Please select a service.</p>
+
+                <label for="message">Message (Optional):</label>
+                <textarea id="message" name="message" rows="4" placeholder="Any specific requirements?"></textarea>
+
+                <button type="submit">Send Booking Request</button>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        // --- 1. NAV INDICATOR MOVEMENT ---
+        const indicator = document.getElementById('nav-indicator');
+        const links = document.querySelectorAll('.nav-link');
+
+        function moveIndicator(el) {
+            if(window.innerWidth > 600) {
+                indicator.style.width = `${el.offsetWidth}px`;
+                indicator.style.left = `${el.offsetLeft}px`;
+            }
+        }
+
+        links.forEach(link => {
+            link.addEventListener('mouseenter', (e) => moveIndicator(e.target));
+        });
+
+        moveIndicator(links[0]);
+
+        // --- 2. SMOOTH SCROLL ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === "#") return;
+                
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // --- 3. FORM VALIDATION ---
+        const form = document.getElementById('carSpaForm');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            let isValid = true;
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const service = document.getElementById('service');
+
+            if (name.value.trim().length < 3) {
+                document.getElementById('nameError').style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById('nameError').style.display = "none";
+            }
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email.value)) {
+                document.getElementById('emailError').style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById('emailError').style.display = "none";
+            }
+
+            if (service.value === "") {
+                document.getElementById('serviceError').style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById('serviceError').style.display = "none";
+            }
+
+            if (isValid) {
+                alert(`Booking Successful!\nService: ${service.value}\nWe will contact you shortly,\nSarthak Giri: 7887428828`);
+                form.reset();
+            }
+        });
+    </script>
+</body>
+</html>
+
+```
