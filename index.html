@@ -328,7 +328,7 @@
     <div class="container">
         <section id="contact" class="contact">
             <h2 class="section-title">Book an Appointment</h2>
-            <form id="carSpaForm">
+            <form id="carSpaForm" action="https://formspree.io/f/mpqbqzvy" method="POST">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" placeholder="Enter your name">
                 <p class="error-text" id="nameError">Please enter your full name.</p>
@@ -421,7 +421,7 @@
 
             if (isValid) {
                 alert(`Booking Successful!\nService: ${service.value}\nWe will contact you shortly,\nSarthak Giri: 7887428828`);
-                form.reset();
+                form.submit(); // THIS LINE SENDS THE EMAIL
             }
         });
     </script>
